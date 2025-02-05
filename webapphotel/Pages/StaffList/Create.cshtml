@@ -1,0 +1,56 @@
+﻿@page
+@model webapphotel.Pages.StaffList.CreateModel
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Create Staff</h2>
+            <hr />
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Staff.Name"></label>
+            <input asp-for="Staff.Name" type="text" class="form-control" />
+            <span asp-validation-for="Staff.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Staff.PhoneNumber"></label>
+            <input asp-for="Staff.PhoneNumber" type="text" class="form-control" />
+            <span asp-validation-for="Staff.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Staff.Address"></label>
+            <input asp-for="Staff.Address" type="text" class="form-control" />
+            <span asp-validation-for="Staff.Address" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Staff.DateOfHirement"></label>
+            <input asp-for="Staff.DateOfHirement" type="text" class="form-control" />
+            <span asp-validation-for="Staff.DateOfHirement" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Staff.Email"></label>
+            <input asp-for="Staff.Email" type="text" class="form-control" />
+            <span asp-validation-for="Staff.Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Staff.JobTitle"></label>
+            <input asp-for="Staff.JobTitle" type="text" class="form-control" />
+            <span asp-validation-for="Staff.JobTitle" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Staff.MonthlySalary"></label>
+            <input asp-for="Staff.MonthlySalary" type="text" class="form-control" />
+            <span asp-validation-for="Staff.MonthlySalary" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px;">Create</button>
+        <a asp-page="Index" class="btn btn-primary" style="width:150px;">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

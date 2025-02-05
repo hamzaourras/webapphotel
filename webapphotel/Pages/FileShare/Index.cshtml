@@ -1,0 +1,11 @@
+﻿@page
+@model webapphotel.Pages.FileShare.IndexModel
+
+@foreach (var file in Model.FileModels)
+{
+    <div>
+        <a href="@file.FilePath" download>@file.FileName</a>
+    </div>
+}
+
+<a asp-page="/FileShare/Upload">Upload New File</a>
