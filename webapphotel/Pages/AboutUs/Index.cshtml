@@ -1,0 +1,92 @@
+﻿@page
+@model webapphotel.Pages.AboutUs.IndexModel
+@{
+    ViewData["Title"] = "About Us";
+}
+<link rel="stylesheet" href="~/css/aboutus.css" />
+
+<div class="hero-section text-white text-center d-flex align-items-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold">Welcome to @Model.HotelName</h1>
+        <p class="lead">Your home away from home in the heart of @Model.Location, offering luxury, comfort, and world-class hospitality.</p>
+        <a href="/Rooms" class="btn btn-light btn-lg">Explore Our Rooms</a>
+    </div>
+</div>
+
+<section class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Our Story</h2>
+            <p>
+                Founded in <strong>@Model.FoundingYear</strong>, @Model.HotelName has become a symbol of <strong>elegance and hospitality</strong> in @Model.Location.
+                From a humble beginning, we have grown into a prestigious establishment, welcoming travelers from all over the world.
+            </p>
+            <p>
+                Nestled in the heart of @Model.Location, we offer breathtaking views, modern amenities, and a warm atmosphere that makes every stay special.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://plus.unsplash.com/premium_photo-1661964071015-d97428970584?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWx8ZW58MHx8MHx8fDA%3D" class="img-fluid rounded shadow" alt="Hotel Image">
+        </div>
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center">Our Mission & Values</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>At @Model.HotelName, we believe that hospitality is about <strong>creating experiences</strong>. Our mission is to <strong>exceed guest expectations</strong> with top-tier services.</p>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Excellence:</strong> Striving for perfection in every service.</li>
+                <li class="list-group-item"><strong>Guest Satisfaction:</strong> Your comfort and happiness matter.</li>
+                <li class="list-group-item"><strong>Authenticity:</strong> Celebrating local culture and cuisine.</li>
+                <li class="list-group-item"><strong>Sustainability:</strong> Eco-friendly practices and responsible tourism.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center">Our Services & Amenities</h2>
+    <div class="row">
+        @foreach (var service in Model.Services)
+        {
+            <div class="col-md-4">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@service</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center">Meet Our Team</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Behind every great hotel is a team of <strong>dedicated professionals</strong> who ensure an exceptional experience.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://media.istockphoto.com/id/1164197127/photo/cheerful-latin-american-team-of-hotel-staff-all-facing-camera-smiling.jpg?s=612x612&w=0&k=20&c=RPZf2cD_mdKWgYoRY_SyeQTQErPNZi-M63BjE2HJCnw=" class="img-fluid rounded shadow" alt="Team Image">
+        </div>
+    </div>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center">Awards & Recognition</h2>
+    <p class="text-center">Our commitment to excellence has earned us prestigious awards, including:</p>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item text-center">@Model.Awards</li>
+    </ul>
+</section>
+
+<section class="text-center my-5">
+    <h3>Plan Your Stay with Us</h3>
+    <p>Experience the perfect blend of <strong>luxury, comfort, and hospitality</strong> at @Model.HotelName.</p>
+    <a href="/Rooms" class="btn btn-primary btn-lg">Explore Our Rooms</a>
+    <a href="/ContactUS" class="btn btn-outline-secondary btn-lg">Contact Us</a>
+</section>

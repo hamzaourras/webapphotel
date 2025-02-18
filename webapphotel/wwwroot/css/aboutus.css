@@ -1,0 +1,94 @@
+﻿/* Hero Section */
+.hero-section {
+    background: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/89/11/15/hotel-facade.jpg?w=1200&h=-1&s=1') center no-repeat;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 0;
+    background-blend-mode: darken;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    color: #f1f1f1; /* Light text for contrast */
+}
+
+    /* Text & Button Styling */
+    .hero-section h1 {
+        font-weight: 700;
+        font-size: 2.5rem; /* Adjusted size */
+        text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+        color: #ffffff;
+    }
+
+    .hero-section p {
+        font-size: 1rem; /* Smaller for readability */
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        color: #d1d1d1;
+    }
+
+    .hero-section .btn {
+        background-color: #007bff; /* Bootstrap primary color */
+        color: #ffffff;
+        padding: 12px 24px;
+        font-size: 1rem;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .hero-section .btn:hover {
+            background-color: #0056b3;
+        }
+
+/* Section Styling */
+body {
+    background-color: #181818; /* Dark theme */
+    color: #d4d4d4;
+}
+
+.container {
+    max-width: 1100px;
+}
+
+h2 {
+    font-weight: 600;
+    color: #f8f8f8; /* Brighter headings */
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1rem;
+    color: #c0c0c0;
+}
+
+/* Card Styling */
+.card {
+    transition: transform 0.3s ease-in-out;
+    background: #222; /* Darker background */
+    color: #d4d4d4;
+    border: none;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    }
+
+/* List Group */
+.list-group-item {
+    font-size: 1rem;
+    background-color: #333; /* Dark background */
+    color: #ffffff;
+    padding: 10px;
+}
+
+    .list-group-item:hover {
+        background-color: #444;
+    }
+
+/* Footer */
+footer {
+    background: #111;
+    color: #bbb;
+    padding: 20px;
+    text-align: center;
+}
