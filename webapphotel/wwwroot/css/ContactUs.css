@@ -1,0 +1,46 @@
+﻿/* Contact Section Styling */
+#contact {
+    background-color: #181818; /* Brownish-white background */
+    padding: 5rem 0;
+}
+
+    #contact .container {
+        background-color: #181818; /* Black background for the content area */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #contact .card {
+        background-color: #222; /* Darker background for cards */
+        color: #d4d4d4;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+        #contact .card h4 {
+            color: #f8f8f8; /* Brighter headings */
+        }
+
+        #contact .card p {
+            color: #c0c0c0;
+        }
+
+        #contact .card .form-control {
+            background-color: #333; /* Dark background for form controls */
+            color: #ffffff;
+            border: none;
+        }
+
+            #contact .card .form-control::placeholder {
+                color: #888;
+            }
+
+        #contact .card .btn-primary {
+            background-color: #007bff; /* Bootstrap primary color */
+            border: none;
+        }
+
+            #contact .card .btn-primary:hover {
+                background-color: #0056b3;
+            }
