@@ -1,0 +1,58 @@
+﻿@page
+@model webapphotel.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+}
+
+<div class="account-container">
+    <div class="account-box">
+        <h2 class="text-center mb-4">Register</h2>
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Name" class="form-label">Name</label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Email" class="form-label">Email</label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.Password" class="form-label">Password</label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Input.ConfirmPassword" class="form-label">ConfirmPassword</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            
+
+            
+
+            <input type="submit" value="Register" class="btn btn-success w-100 p-2" />
+            <p class="text-center mt-2">
+                Already have an account? <a asp-page="/Account/Login" class="text-decoration-none">Login</a>
+            </p>
+
+            <div class="text-center mt-3">
+                <a asp-page="/Index" class="text-decoration-none">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,26 +1,64 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using webapphotel.Data;
+using webapphotel.Model;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// Configure the database connection
+// Configure the database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure file upload size limit (default is 2MB, increase if needed)
+// Configure Identity
+builder.Services.AddIdentity<Users, IdentityRole>(options =>
+{
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+
+builder.Services.AddSession();
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 10485760; // 10MB limit
+    options.MultipartBodyLengthLimit = 10485760; // 10MB file upload
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
+static async Task SeedRoles(IServiceProvider services)
+{
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roles = { "Admin", "User" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+}
+using (var scope = app.Services.CreateScope())
+{
+    await SeedRoles(scope.ServiceProvider);
+}
+
+
+
+// Configure the HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -29,10 +67,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-app.UseAuthorization();
+
+app.UseSession(); // enable session if needed
+app.UseAuthentication(); // REQUIRED for Identity
+app.UseAuthorization(); // must come after Authentication
 
 app.MapRazorPages();
-
 app.Run();
