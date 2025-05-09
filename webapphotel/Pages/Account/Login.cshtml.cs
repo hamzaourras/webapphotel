@@ -25,15 +25,16 @@ namespace webapphotel.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) { 
+            if (!ModelState.IsValid)
+            {
                 return Page();
             }
 
             var result = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                
-                if (result.Succeeded)
+
+            if (result.Succeeded)
             {
-                
+
                 var user = await signInManager.UserManager.FindByEmailAsync(Input.Email);
                 var roles = await signInManager.UserManager.GetRolesAsync(user);
                 if (roles.Contains("Admin"))
@@ -47,5 +48,5 @@ namespace webapphotel.Pages.Account
         }
     }
 
-    
+
 }

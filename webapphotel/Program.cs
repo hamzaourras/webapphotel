@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using webapphotel.Data;
 using webapphotel.Model;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,13 +39,27 @@ var app = builder.Build();
 static async Task SeedRoles(IServiceProvider services)
 {
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    string[] roles = { "Admin", "User" };
+    var configuration = services.GetRequiredService<IConfiguration>();
+    string[] roles = configuration.GetSection("Roles").Get<string[]>() ?? Array.Empty<string>();
 
+    // Create missing roles
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))
         {
             await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+
+    // Materialize roles to a list to avoid open data reader
+    var existingRoles = roleManager.Roles.ToList();
+
+    // Delete roles not in the configuration
+    foreach (var role in existingRoles)
+    {
+        if (!roles.Contains(role.Name, StringComparer.OrdinalIgnoreCase))
+        {
+            await roleManager.DeleteAsync(role);
         }
     }
 }
