@@ -1,0 +1,85 @@
+﻿@page
+@model webapphotel.Pages.AdminDashboard.ManageBooking.ManageBookingModel
+<partial name="_Notification" />
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+        #myTable thead th {
+            color: white;
+        }
+
+        #myTable tbody tr td {
+            color: white;
+        }
+    </style>
+</head>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Booking List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-page="AddBooking" class="btn btn-primary">
+                <i class="bi bi-plus-square"></i> &nbsp;Add new Booking
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    <table id="myTable" class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Room Type</th>
+                <th>Room Number</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.BookingList != null && Model.BookingList.Any())
+            {
+                foreach (var obj in Model.BookingList)
+                {
+                    <tr>
+                        <td>@obj.FullName</td>
+                        <td>@obj.Email</td>
+                        <td>@obj.PhoneNumber</td>
+                        <td>@obj.RoomType</td>
+                        <td>@obj.RoomNumber</td>
+                        <td>@obj.CheckInDate.ToShortDateString()</td>
+                        <td>@obj.CheckOutDate.ToShortDateString()</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-page="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-page="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-white">No bookings available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    let table = new DataTable('#myTable', {});
+</script>

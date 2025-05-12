@@ -67,10 +67,7 @@
                             <a asp-page="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
                                 <i class="bi bi-trash"></i>
                             </a>
-                            <button class="btn btn-secondary mx-2 upload-btn" data-staff-id="@obj.Id">
-                                <i class="bi bi-upload"></i> Upload
-                            </button>
-                            <input type="file" class="d-none file-input" data-staff-id="@obj.Id"/>
+                            
                         </div>
                     </td>
                 </tr>
@@ -86,44 +83,4 @@
     let table = new DataTable('#myTable', {
 
     });
-</script>
-<script>
-          $(document).ready(function () {
-        $(".upload-btn").click(function () {
-            var fileInput = $(this).siblings(".file-input");
-            fileInput.trigger("click");
-
-            fileInput.change(function () {
-                var file = this.files[0];
-
-                if (!file) {
-                    alert("No file selected!");
-                    return;
-                }
-
-                var formData = new FormData();
-                formData.append("UploadedFile", file); // Make sure the name matches the C# property
-
-                console.log("Uploading file:", file.name);
-
-                $.ajax({
-                    url: "/FileShare/Upload",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        console.log("Success:", response);
-                        alert("File uploaded successfully: " + response.filePath);
-                    },
-                    error: function (xhr) {
-                        console.error("Error uploading file:", xhr.responseText);
-                        alert("Error uploading file: " + xhr.responseText);
-                    }
-                });
-            });
-        });
-    });
-
-
 </script>

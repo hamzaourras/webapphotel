@@ -1,0 +1,48 @@
+﻿@page
+@model webapphotel.Pages.AdminDashboard.ManageBooking.DeleteModel
+
+<form method="post">
+    <input hidden asp-for="Booking.Id" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Delete Booking</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.FullName"></label>
+            <input asp-for="Booking.FullName" type="text" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Booking.Email"></label>
+            <input asp-for="Booking.Email" type="email" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Booking.PhoneNumber"></label>
+            <input asp-for="Booking.PhoneNumber" type="text" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Booking.RoomType"></label>
+            <input asp-for="Booking.RoomType" type="text" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Booking.RoomNumber"></label>
+            <input asp-for="Booking.RoomNumber" type="text" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Booking.CheckInDate"></label>
+            <input asp-for="Booking.CheckInDate" type="date" disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Booking.CheckOutDate"></label>
+            <input asp-for="Booking.CheckOutDate" type="date" disabled class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-danger" style="width:150px;">Delete</button>
+        <a asp-page="/AdminDashboard/ManageBooking/ManageBooking" class="btn btn-primary" style="width:150px;">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

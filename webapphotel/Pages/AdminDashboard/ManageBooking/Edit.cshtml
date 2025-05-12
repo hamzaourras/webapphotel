@@ -1,0 +1,67 @@
+﻿@page
+@model webapphotel.Pages.AdminDashboard.ManageBooking.EditModel
+
+<form method="post">
+    <input hidden asp-for="Booking.Id" /> <div class="border p-3 mt-4">
+        <div class="row pb-2"> <h2 class="text-primary pl-3">Edit Booking</h2> <hr /> </div>
+        php-template
+        Copy
+        Edit
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.FullName"></label>
+            <input asp-for="Booking.FullName" type="text" class="form-control" />
+            <span asp-validation-for="Booking.FullName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.Email"></label>
+            <input asp-for="Booking.Email" type="email" class="form-control" />
+            <span asp-validation-for="Booking.Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.PhoneNumber"></label>
+            <input asp-for="Booking.PhoneNumber" type="text" class="form-control" />
+            <span asp-validation-for="Booking.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.RoomType"></label>
+            <select asp-for="Booking.RoomType" class="form-control">
+                <option value=""></option>
+                <option>Single</option>
+                <option>Double</option>
+                <option>Suite</option>
+            </select>
+            <span asp-validation-for="Booking.RoomType" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Booking.RoomNumber"></label>
+            <input asp-for="Booking.RoomNumber" type="text" class="form-control" />
+            <span asp-validation-for="Booking.RoomNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.CheckInDate"></label>
+            <input asp-for="Booking.CheckInDate" type="date" class="form-control" />
+            <span asp-validation-for="Booking.CheckInDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Booking.CheckOutDate"></label>
+            <input asp-for="Booking.CheckOutDate" type="date" class="form-control" />
+            <span asp-validation-for="Booking.CheckOutDate" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:150px;">Update</button>
+        <a asp-page="/AdminDashboard/ManageBooking/ManageBooking" class="btn btn-primary" style="width:150px;">Back to List</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
