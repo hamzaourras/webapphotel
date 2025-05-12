@@ -1,0 +1,42 @@
+﻿@page
+@model AddBookingModel
+@{
+    ViewData["Title"] = "Add Booking";
+}
+
+<h2>Add Booking</h2>
+<form method="post">
+    <div class="form-group"> 
+        <label asp-for="Booking.FullName"></label> 
+        <input asp-for="Booking.FullName" class="form-control" /> 
+        </div> 
+        <div class="form-group"> 
+            <label asp-for="Booking.Email"></label> 
+            <input asp-for="Booking.Email" class="form-control" /> 
+        </div> 
+        <div class="form-group"> 
+            <label asp-for="Booking.PhoneNumber"></label> 
+            <input asp-for="Booking.PhoneNumber" class="form-control" /> 
+        </div> 
+        <div class="form-group"> 
+            <label asp-for="Booking.RoomType"></label> 
+            <select asp-for="Booking.RoomType" class="form-control"> 
+                <option>Single</option> 
+                <option>Double</option> 
+                <option>Suite</option> 
+            </select> 
+            </div> 
+            <div class="form-group"> 
+                <label asp-for="Booking.RoomNumber"></label> 
+                <input asp-for="Booking.RoomNumber" class="form-control" /> 
+            </div> 
+            <div class="form-group"> 
+                <label asp-for="Booking.CheckInDate"></label> 
+                <input asp-for="Booking.CheckInDate" type="date" class="form-control" />
+            </div> 
+            <div class="form-group">
+                <label asp-for="Booking.CheckOutDate"></label> 
+                <input asp-for="Booking.CheckOutDate" type="date" class="form-control" />
+            </div> 
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+        </form>

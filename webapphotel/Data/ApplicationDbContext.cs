@@ -11,8 +11,9 @@ namespace webapphotel.Data
         {
         }
 
-        public DbSet<Category> Category { get; set; }
+        
         public DbSet<Staff> Staff { get; set; }
         public DbSet<FileModel> FileModels { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }

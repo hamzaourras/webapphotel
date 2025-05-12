@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Compile Remove="Model\TableTest.cs" />
-    <Compile Remove="Pages\Categories\Create.cs" />
   </ItemGroup>
 
   <ItemGroup>
