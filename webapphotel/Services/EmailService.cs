@@ -1,6 +1,8 @@
 using System.Net;
-using System.Net.Mail;
 using Microsoft.Extensions.Options;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 
 namespace webapphotel.Services
 {
@@ -24,32 +26,60 @@ namespace webapphotel.Services
     {
         private readonly EmailSettings _emailSettings;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<EmailService> _logger;
 
-        public EmailService(IOptions<EmailSettings> emailSettings, IHttpContextAccessor httpContextAccessor)
+        public EmailService(
+            IOptions<EmailSettings> emailSettings, 
+            IHttpContextAccessor httpContextAccessor,
+            ILogger<EmailService> logger)
         {
             _emailSettings = emailSettings.Value;
             _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            var mail = new MailMessage
+            try
             {
-                From = new MailAddress(_emailSettings.Email),
-                Subject = subject,
-                Body = message,
-                IsBodyHtml = true
-            };
-            mail.To.Add(new MailAddress(email));
+                // Create the email message
+                var mimeMessage = new MimeMessage();
+                mimeMessage.From.Add(new MailboxAddress("Hotel App", _emailSettings.Email));
+                mimeMessage.To.Add(new MailboxAddress("", email));
+                mimeMessage.Subject = subject;
 
-            using var smtp = new SmtpClient(_emailSettings.Host, _emailSettings.Port)
+                // Build the body
+                var bodyBuilder = new BodyBuilder
+                {
+                    HtmlBody = message
+                };
+
+                mimeMessage.Body = bodyBuilder.ToMessageBody();
+
+                // Send the message
+                using var client = new SmtpClient();
+                
+                // Connect to SMTP server
+                await client.ConnectAsync(_emailSettings.Host, _emailSettings.Port, 
+                    _emailSettings.EnableSsl ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls);
+
+                // Authenticate if needed
+                if (!_emailSettings.UseDefaultCredentials)
+                {
+                    await client.AuthenticateAsync(_emailSettings.Email, _emailSettings.Password);
+                }
+
+                // Send the message
+                await client.SendAsync(mimeMessage);
+                
+                // Disconnect
+                await client.DisconnectAsync(true);
+            }
+            catch (Exception ex)
             {
-                Credentials = new NetworkCredential(_emailSettings.Email, _emailSettings.Password),
-                EnableSsl = _emailSettings.EnableSsl,
-                UseDefaultCredentials = _emailSettings.UseDefaultCredentials
-            };
-
-            await smtp.SendMailAsync(mail);
+                _logger.LogError(ex, "Error sending email to {Email}", email);
+                throw;
+            }
         }
 
         public async Task SendVerificationEmailAsync(string email, string token)
@@ -85,7 +115,7 @@ namespace webapphotel.Services
                 </body>
                 </html>";
 
-            await SendEmailAsync(email, subject, message);
+             await SendEmailAsync(email, subject, message);
         }
     }
 }
