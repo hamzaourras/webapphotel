@@ -18,6 +18,6 @@ namespace webapphotel.Data
         public DbSet<Users> Users { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         
-        public DbSet<Services> Services { get; set; }
+        public DbSet<Model.Services> Services { get; set; }
     }
 }
