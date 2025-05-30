@@ -10,7 +10,7 @@ namespace webapphotel.Pages.AdminDashboard.ManageBooking
     public class AddBookingModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-
+        
       
 public AddBookingModel(ApplicationDbContext context)
         {
