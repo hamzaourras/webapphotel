@@ -1,0 +1,33 @@
+@page
+@model webapphotel.Pages.Account.ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm Email";
+    Layout = "_Layout";
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+}
+
+<div class="account-container">
+    <div class="account-box">
+        <h2 class="text-center mb-4">Email Confirmation</h2>
+        
+        @if (Model.IsConfirmed)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>Your email has been successfully verified!</p>
+                <p>You can now log in to access your account.</p>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-page="/Account/Login" class="btn btn-primary">Log In</a>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                <p>@Model.ErrorMessage</p>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-page="/Account/Login" class="btn btn-primary">Back to Login</a>
+            </div>
+        }
+    </div>
+</div>
